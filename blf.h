@@ -33,7 +33,8 @@
 
 /* Add this type so we'll compile nicely on Solaris.
    Thanks to Jeremy LaTrasse and the Twitter crew. */
-#ifdef __sun
+#if defined(__sun) || defined(_WIN32)
+	#include <stdint.h>
 	#define u_int8_t uint8_t
 	#define u_int16_t uint16_t
 	#define u_int32_t uint32_t

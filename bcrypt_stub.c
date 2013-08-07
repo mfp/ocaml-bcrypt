@@ -5,6 +5,14 @@
 #include <caml/fail.h>
 #include <string.h>
 
+#if defined(__sun) || defined(_WIN32)
+	#include <stdint.h>
+	#define u_int8_t uint8_t
+	#define u_int16_t uint16_t
+	#define u_int32_t uint32_t
+	#define u_int64_t uint64_t
+#endif
+
 char *bcrypt_do_hash(const char *, const char *);
 void bcrypt_do_encode_salt(char *, u_int8_t *, u_int16_t, u_int8_t);
 
