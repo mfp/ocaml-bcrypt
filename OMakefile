@@ -1,18 +1,21 @@
+
+USE_OCAMLFIND  = true
+
 NATIVE_ENABLED = true
 BYTE_ENABLED = true
 
 CFLAGS += -Wall -O3
 
 %.o: %.c
-	$(OCAMLC) $(mapprefix -ccopt, $(CFLAGS)) -c $^
+	$(OCAMLFIND) ocamlc $(mapprefix -ccopt, $(CFLAGS)) -c $^
 
 bcrypt.cma bcrypt.a bcrypt.cmxa: \
 	bcrypt_orig.o blowfish.o bcrypt_stub.o bcrypt.cmx bcrypt.cmo
-	ocamlmklib -o bcrypt $^
+	$(OCAMLFIND) ocamlmklib -o bcrypt $^
 
 .DEFAULT: bcrypt.cma bcrypt.cmxa
 
 .PHONY: clean
 
 clean:
-	rm -f $(filter-proper-targets $(ls R, .)) *.s *.annot *.so *.a
+	rm -f $(filter-proper-targets $(ls R, .)) *.s *.annot *.so *.dll *.a
