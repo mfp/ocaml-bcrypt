@@ -4,7 +4,7 @@ USE_OCAMLFIND  = true
 NATIVE_ENABLED = true
 BYTE_ENABLED = true
 
-CFLAGS += -Wall -O3
+CFLAGS += -Wall -O3 -I $(shell ocamlfind printconf stdlib)
 
 %.o: %.c
 	$(OCAMLFIND) ocamlc $(mapprefix -ccopt, $(CFLAGS)) -c $^
